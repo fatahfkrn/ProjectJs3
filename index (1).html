@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas</title>
+</head>
+
+<body>
+    <!-- Note: BedaIn ID, Class nya yah. Nanti kena Plagiat Salam Ashu Rasa  :) 
+        itu logic Js nya kira-kira begitu. Love You All ♥♥♥
+
+        Untuk CSS nya Bikin sendiri yah....capek saya.
+    -->
+
+
+    <!-- Ini Html Login -->
+    <form>
+        <div id="containerLogin">
+            <h1 id="h1">Login</h1>
+            <div id="label">
+                <div class="pembungkusUname&Pw">
+                    <p class="parag">Username:</p>
+                    <input type="text" id="user" autocomplete="0">
+                </div>
+                <!--username valid = fata21162si-->
+                <div class="pembungkusUname&Pw">
+                    <p class="parag">Password:</p>
+                    <input type="text" id="pw" autocomplete="0">
+                </div>
+                <!--password valid = integrity-->
+                <div class="pembungkus">
+                    <button id="send">Submit</button>
+                </div>
+                <div>
+                    <h2>Note</h2>
+                    <p>
+                        Username Valid = fata21162si <br>
+                        Password Valid = integrity
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Ini Html Kurs -->
+    <form name="formKurs">
+        <div class="containerKurs">
+            <h1 id="titleMataUang">Mata Uang</h1>
+            <table id="tabel">
+                <tr>
+                    <td><label for="nilai">Nilai</label></td>
+                    <td>Mata Uang </td>
+                    <td><label for="kurs">Hasil Kurs dalam Rupiah</label></td>
+
+                </tr>
+                <tr>
+                    <td><input type="text" name="nilai" autocomplete="0" onchange="konversiuang()"></td>
+                    <td>
+                        <select name="uangasing" id="uang" onchange="konversiuang()">
+                            <option value="pilih">-- Pilih Mata Uang Asing --</option>
+                            <option value="USD">United State Dollar</option>
+                            <option value="SGD">Singapore Dollar</option>
+                            <option value="MLY">Ringgit Malaysia</option>
+                            <option value="EURO">Euro</option>
+                            <option value="RAS">Riyal Arab Saudi</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="kurs"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+    <!-- Ini Html Chat Box -->
+    <div id="containerChatBox">
+        <h2 class="h2">Chat Message</h2>
+        <div id="tampilan">
+            <div id="buble">
+            </div>
+        </div>
+        <div class="pembungkusInputText">
+            <input id="text" type="text" autocomplete="0">
+            <button id="kirim" onclick="pesan()">Send</button>
+        </div>
+    </div>
+
+    <!-- Ini Html Img Picker -->
+    <div class="containerImgPicker">
+        <div class="titel">
+            <h1>Image Picker</h1>
+        </div>
+        <select id="pilih" onchange="img()">
+            <option value="pilih">-- Pilih Gambar --</option>
+            <option class="gambar" id="gambar1" value="gambar1">gambar1</option>
+            <option class="gambar" id="gambar2" value="gambar2">gambar2</option>
+            <option class="gambar" id="gambar3" value="gambar3">gambar3</option>
+            <option class="gambar" id="gambar4" value="gambar4">gambar4</option>
+            <option class="gambar" id="gambar5" value="gambar5">gambar5</option>
+        </select>
+        <img id="image" src="" alt="">
+    </div>
+
+    <!-- Ini Html Validation -->
+    <form onsubmit="form()">
+        <div id="pembungkusValidation">
+            <h1 class="title">Validation</h1>
+            <label for="username"><span class="nama">Nama: </span><br>
+                <input type="text" class="inp" id="username" name="username" required maxlength="30" autocomplete="0">
+            </label>
+
+            <label for="email"><span class="nama">Email:</span><br>
+                <input type="email" class="inp" id="email" name="email" autocomplete="0" required>
+            </label>
+
+            <label for="jamBerangkat"><span class="nama">Jam Keberangkatan:</span><br>
+                <input type="time" class="inp" id="jamBerangkat" name="jamKeberangkatan" autocomplete="0" min="00.00"
+                    max="23.59" required>
+            </label>
+
+            <label for="tujuan"><span class="nama">Tujuan:</span><br>
+                <input type="text" class="inp" id="tujuan" name="tujuan" autocomplete="0" required>
+            </label>
+
+            <label for="jumlahTiket"><span class="nama">Jumlah Tiket:</span><br>
+                <input type="number" class="inp" id="jumlahTiket" name="jumlahTiket" autocomplete="0" required min="0"
+                    max="10">
+            </label>
+            <div class="button">
+                <label for="submit">
+                    <input id="submit" type="submit">
+                </label>
+                <label for="reset">
+                    <input id="reset" type="reset">
+                </label>
+            </div>
+
+        </div>
+
+        <div id="tampilan">
+            <p></p>
+        </div>
+    </form>
+
+    <!-- Ini JavaScriptnya -->
+    <script>
+        // Ini Script Login
+        const click = document.getElementById("send");
+
+        let kirim = click.addEventListener("click", (e) => {
+            e.preventDefault()
+            let user = document.getElementById("user").value;
+            let pass = document.getElementById("pw").value;
+            if (user == "fata21162si" && pass == "integrity") {
+                alert("Login Berhasil")
+                window.open("http://127.0.0.1:5500/Login/login%20berhasil.html")
+                window.location = "login berhasil.html"
+            } else {
+                alert("Login gagal")
+            }
+        })
+
+        // Ini Js Kurs
+        function konversiuang() {
+            var input = (document.form.nilai.value);
+            var hitunguang = (document.form.uangasing.value);
+
+            var hasil = 0;
+
+            if (hitunguang == "USD") {
+                hasil = input * 9.915;
+            }
+            else if (hitunguang == "SGD") {
+                hasil = input * 13.472;
+            }
+            else if (hitunguang == "MLY") {
+                hasil = input * 0.874;
+            }
+            else if (hitunguang == "EURO") {
+                hasil = input * 15.888;
+            }
+            else if (hitunguang == "RAS") {
+                hasil = input * 3.592;
+            }
+            else {
+                hasil = 0;
+            }
+            document.form.kurs.value = eval(hasil);
+        }
+        // Ini Js Chat Box
+        function pesan() {
+            let pesan = document.getElementById("text").value;
+            let element = document.createElement("h2");
+            element.innerHTML = pesan;
+            document.getElementById("tampilan").appendChild(element);
+        }
+
+        // Ini Js Image Picker
+        function img() {
+            const pilih = document.getElementById("pilih")
+            if (pilih.value == "gambar1") {
+                document.getElementById("image").src = "img/gambar1.jpg"
+                alert("ini gambar gambar1")
+            }
+            else if (pilih.value == "gambar2") {
+                document.getElementById("image").src = "img/gambar2.jpg"
+                alert("ini gambar gambar2")
+            }
+            else if (pilih.value == "gambar3") {
+                document.getElementById("image").src = "img/gambar3.jpg"
+                alert("ini gambar gambar3")
+            }
+            else if (pilih.value == "gambar4") {
+                document.getElementById("image").src = "img/gambar3.jpg"
+                alert("ini gambar gambar3")
+            }
+            else if (pilih.value == "gambar5") {
+                document.getElementById("image").src = "img/gambar5.jp"
+                alert("ini gambar gambar5")
+            }
+            else {
+                document.getElementById("image").src = 0
+            }
+        }
+
+        // Ini Js Form Validation
+        function form() {
+
+            let username = document.getElementById("username").value;
+            mail = document.getElementById("email").value;
+            berangkat = document.getElementById("jamBerangkat").value;
+            tujuan = document.getElementById("tujuan").value;
+            tiket = document.getElementById("jumlahTiket").value;
+
+            let paragraf = document.createElement("p");
+
+            event.preventDefault()
+            paragraf.innerHTML = "Nama Pelanggan: " + username + '<br>' + "Email: " + mail + '<br>' + "Jam Berangkat: " + berangkat + '<br>' + "Tujuan: " + tujuan + '<br>' + "Tiket: " + tiket
+            document.getElementById("tampilan").appendChild(paragraf);
+        } 
+    </script>
+</body>
+
+</html>
